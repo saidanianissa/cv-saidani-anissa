@@ -194,7 +194,7 @@
       text-decoration: underline;
     }
 
-    /* Grille de navigation */
+    /* Grille de navigation sur l'accueil */
     .menu-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -620,6 +620,33 @@
       border: none;
     }
 
+    /* Adaptation mobile / responsive */
+    @media (max-width: 640px) {
+      .maquette-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .action-btn-group {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .action-btn-group .btn,
+      .action-btn-group .maquette-toggle-btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .modal-content {
+        padding: 15px;
+        max-height: 95vh;
+      }
+
+      .pdf-viewer-container {
+        height: 350px;
+      }
+    }
+
     @media print {
       header, .filter-bar, .controls, .btn, .menu-grid, .btn-back, .maquette-toggle-btn, .action-btn-group { display: none !important; }
       .view-section, .maquette-content { display: block !important; }
@@ -661,7 +688,7 @@
           <div class="hero-text">
             <div class="status-badge" data-i18n="status">🟢 Stage de fin d'études de 3 à 6 mois dès Janvier 2027 | Mobilité géographique</div>
             <h1>Anissa SAIDANI</h1>
-            <h2 data-i18n="subtitle">Stage de fin d'études</h2>
+            <h2 data-i18n="subtitle">Étudiante en Master Actuariat & Data Science </h2>
             <p data-i18n="bio">
               Étudiante en Master 2 Actuariat et préparant le D.U. Big Data, Data Science & Analyse des Risques, je suis spécialisée en modélisation quantitative, tarification et traitement de données complexes. Major de promotion en Master 1, je maîtrise R, Python, SAS, SQL et VBA, et je travaille aisément en anglais. Je souhaite mettre ma rigueur analytique et mon goût pour la donnée au service d'une équipe en actuariat, data science ou gestion des risques.
             </p>
@@ -671,14 +698,14 @@
               <li><strong data-i18n="contact_location">📍 Localisation :</strong> Montpellier, France (<span data-i18n="contact_mobility">Mobilité géographique</span>)</li>
               <li><strong data-i18n="contact_email">✉️ Email :</strong> <a href="mailto:saidani.anissa25@icloud.com">saidani.anissa25@icloud.com</a></li>
               <li><strong data-i18n="contact_phone">📞 Tél :</strong> +33 6 49 55 23 34</li>
-              <li><strong data-i18n="contact_linkedin">💼 LinkedIn :</strong> <a href="https://www.linkedin.com/in/anissa-saidani" target="_blank" rel="noopener noreferrer" data-i18n="contact_linkedin_profile">Profil LinkedIn</a></li>
+              <li><strong data-i18n="contact_linkedin">🌐 LinkedIn :</strong> <a href="https://www.linkedin.com/in/anissa-saidani" target="_blank" rel="noopener noreferrer" data-i18n="contact_linkedin_profile">Profil LinkedIn</a></li>
               <li><strong data-i18n="contact_education">🎓 Formation :</strong> <span data-i18n="contact_education_value">Master 2 Actuariat & DU Big Data</span></li>
             </ul>
           </div>
         </div>
       </section>
 
-      <!-- 4 Grands Boutons -->
+      <!-- 4 Grands Boutons sur l'accueil -->
       <div class="menu-grid">
         <div class="menu-card" onclick="showView('projects')">
           <div class="menu-card-icon">💻</div>
@@ -771,11 +798,11 @@
           </div>
         </div>
 
-        <div class="project-card" data-category="stats actuariat" onclick="openModal('p5')">
+        <div class="project-card" data-category="stats" onclick="openModal('p5')">
           <div>
             <div class="project-card-header">
               <div class="project-card-title" data-i18n="p5_title">Stratégie de réallocation de portefeuille & Analyse financière (PEA)</div>
-              <span class="project-card-grade" data-i18n="completed_label">Terminé</span>
+              <span class="project-card-grade" data-i18n="completed_label">17/20</span>
             </div>
             <div class="project-card-desc" data-i18n="p5_desc">Évaluation des arbitrages rendement-risque et modélisation de stratégies d'allocation d'actifs selon les évolutions de marché.</div>
           </div>
@@ -786,7 +813,7 @@
       </div>
     </div>
 
-    <!-- FORMATION AVEC OPTION PDF MODALE ET MAQUETTES -->
+    <!-- FORMATION AVEC LES PDF MODALE ET MAQUETTES OFFICIELLES -->
     <div id="view-education" class="view-section">
       <button class="btn btn-back" onclick="showView('home')">⬅ <span data-i18n="back_home">Retour au profil</span></button>
       <h3 class="section-title" data-i18n="edu_title">Formation</h3>
@@ -860,7 +887,6 @@
                 <ul>
                   <li>Stage en entreprise de 3 à 6 mois (30 ECTS)</li>
                   <li>Mémoire de fin d'études & Soutenance</li>
-                  <li>Mémoire de recherche / Séminaires d'initiation à la recherche</li>
                 </ul>
               </div>
             </div>
@@ -1147,12 +1173,12 @@
         contact_mobility: "Mobilité géographique",
         contact_email: "✉️ Email :",
         contact_phone: "📞 Téléphone :",
-        contact_linkedin: "💼 LinkedIn :",
+        contact_linkedin: "🌐 LinkedIn :",
         contact_linkedin_profile: "Profil LinkedIn",
         contact_education: "🎓 Formation :",
         contact_education_value: "Master 2 Actuariat & DU Big Data",
         status: "🟢 Stage de fin d'études de 3 à 6 mois dès Janvier 2027 | Mobilité géographique",
-        subtitle: "Stage de fin d'études en Actuariat, Data Science & Analyse des Risques",
+        subtitle: "Étudiante en Master Actuariat & Data Science",
         bio: "Étudiante en Master 2 Actuariat et préparant le D.U. Big Data, Data Science & Analyse des Risques, je suis spécialisée en modélisation quantitative, tarification et traitement de données complexes. Major de promotion en Master 1, je maîtrise R, Python, SAS, SQL et VBA, et je travaille aisément en anglais. Je souhaite mettre ma rigueur analytique et mon goût pour la donnée au service d'une équipe en actuariat, data science ou gestion des risques.",
         print: "Imprimer / PDF",
         copy_link: "Copier le lien",
@@ -1178,7 +1204,7 @@
         filter_ds: "Data Science & SAS",
         filter_stats: "Modélisation & Stats",
         ongoing_label: "En cours",
-        completed_label: "Terminé",
+        completed_label: "17/20",
         p1_title: "Développement d'un outil de tarification en Actuariat Vie (Excel / VBA)",
         p1_desc: "Conception et programmation d'un outil interactif de modélisation actuarielle et de tarification des contrats d'assurance vie sous Excel/VBA.",
         p4_title: "Analyse statistique et segmentation d'un portefeuille assurance 2-roues (SAS)",
@@ -1247,12 +1273,12 @@
         contact_mobility: "Open to relocation",
         contact_email: "✉️ Email:",
         contact_phone: "📞 Phone:",
-        contact_linkedin: "💼 LinkedIn:",
+        contact_linkedin: "🌐 LinkedIn:",
         contact_linkedin_profile: "LinkedIn Profile",
         contact_education: "🎓 Education:",
         contact_education_value: "Master's in Actuarial Science & University Diploma in Big Data",
         status: "🟢 End-of-Studies Internship (3 to 6 months from Jan 2027) | Geographical Mobility",
-        subtitle: "End-of-Studies Internship in Actuarial Science, Data Science & Risk Analytics",
+        subtitle: "Master's Student in Actuarial Science & Data Science",
         bio: "Master 2 Actuarial Science student also pursuing a University Diploma in Big Data, Data Science & Risk Analysis. Specialized in quantitative modeling, pricing, and complex data processing. Ranked 1st in Master 1, proficient in R, Python, SAS, SQL, and VBA. Seeking to apply analytical rigor and data expertise within an actuarial, data science, or risk management team.",
         print: "Print / PDF",
         copy_link: "Copy link",
@@ -1278,7 +1304,7 @@
         filter_ds: "Data Science & SAS",
         filter_stats: "Modeling & Stats",
         ongoing_label: "In Progress",
-        completed_label: "Completed",
+        completed_label: "17/20",
         p1_title: "Life Insurance Pricing Tool Development (Excel / VBA)",
         p1_desc: "Design and programming of an interactive actuarial modeling and life insurance contract pricing tool in Excel/VBA.",
         p4_title: "Statistical Analysis & Portfolio Segmentation for 2-Wheeler Insurance (SAS)",
