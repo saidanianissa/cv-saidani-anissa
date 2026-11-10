@@ -194,26 +194,46 @@
       text-decoration: underline;
     }
 
-    /* Animation Scroll Hint Mobile */
-    .scroll-hint {
-      display: none;
-      text-align: center;
-      margin-top: 20px;
-      padding: 10px 0 0 0;
-      color: var(--accent);
-      font-size: 0.85rem;
-      font-weight: 600;
+    /* BOUTON ROND FIXE POUR SCROLL SUR MOBILE */
+    .scroll-btn-fixed {
+      position: fixed;
+      bottom: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 90;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-color: var(--accent);
+      color: #ffffff;
+      border: 2px solid var(--bg-primary);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.3s ease, transform 0.3s ease;
       animation: bounce 2s infinite;
     }
 
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-      40% { transform: translateY(-8px); }
-      60% { transform: translateY(-4px); }
+    .scroll-btn-fixed.hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, 20px);
     }
 
-    @media (max-width: 768px) {
-      .scroll-hint { display: block; }
+    .scroll-btn-fixed svg {
+      width: 24px;
+      height: 24px;
+      stroke: currentColor;
+      stroke-width: 2.5;
+      fill: none;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
+      40% { transform: translate(-50%, -8px); }
+      60% { transform: translate(-50%, -4px); }
     }
 
     /* Grille de navigation sur l'accueil */
@@ -222,6 +242,7 @@
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 20px;
       margin-top: 30px;
+      scroll-margin-top: 80px;
     }
 
     .menu-card {
@@ -259,7 +280,6 @@
       color: var(--text-muted);
     }
 
-    /* Badge Cliquable "Voir →" */
     .card-action-badge {
       margin-top: 5px;
       font-size: 0.78rem;
@@ -682,7 +702,7 @@
     }
 
     @media print {
-      header, .filter-bar, .controls, .btn, .menu-grid, .btn-back, .maquette-toggle-btn, .action-btn-group, .scroll-hint { display: none !important; }
+      header, .filter-bar, .controls, .btn, .menu-grid, .btn-back, .maquette-toggle-btn, .action-btn-group, .scroll-btn-fixed { display: none !important; }
       .view-section, .maquette-content { display: block !important; }
       body { background: #fff; color: #000; }
       .project-card, .timeline-item, .skill-box, .lang-card { border: 1px solid #ccc; break-inside: avoid; }
@@ -739,15 +759,17 @@
             </ul>
           </div>
         </div>
-
-        <!-- INDICATEUR VISUEL POUR MOBILE -->
-        <div class="scroll-hint" data-i18n="scroll_hint">
-          Découvrir les rubriques ci-dessous 🠗
-        </div>
       </section>
 
-      <!-- 4 Grands Boutons sur l'accueil avec Affordance Cliquable -->
-      <div class="menu-grid">
+      <!-- BOUTON ROND FIXE CLIQUABLE DE DÉFILEMENT (MOBILE) -->
+      <button id="scrollBtn" class="scroll-btn-fixed" onclick="scrollToMenu()" aria-label="Défiler vers les rubriques">
+        <svg viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+        </svg>
+      </button>
+
+      <!-- 4 Grands Boutons sur l'accueil -->
+      <div class="menu-grid" id="menuGrid">
         <div class="menu-card" onclick="showView('projects')">
           <div class="menu-card-icon">💻</div>
           <div class="menu-card-title" data-i18n="projects_title">Projets Académiques</div>
@@ -1225,7 +1247,6 @@
         status: "🟢 Stage de fin d'études de 3 à 6 mois dès Janvier 2027 | Mobilité géographique",
         subtitle: "Étudiante en Master Actuariat & Data Science",
         bio: "On dit de moi que j'aime comprendre les sujets en profondeur, apprendre continuellement et m'adapter rapidement à de nouveaux environnements. Curieuse et autonome, j'apprécie autant consolider mes acquis que me confronter à de nouveaux défis quantitatifs avec rigueur et engagement. \n\n Dans le cadre de mon stage de fin d'études, je souhaite développer mon expertise en modélisation actuarielle, en analyse quantitative des risques et en valorisation de données massives. À long terme, j'ambitionne de passer les examens de l'IFoA pour obtenir la qualification d'actuaire certifiée et évoluer dans un contexte international. \n\n Rigoureuse, réactive et dotée d'une forte capacité d'apprentissage, j'apporte une double compétence solide en actuariat et data science, une maîtrise opérationnelle de la programmation, ainsi qu'une réelle motivation à contribuer activement aux projets technico-actuariels de l'équipe.",
-        scroll_hint: "Découvrir les rubriques ci-dessous 🠗",
         click_view: "Voir",
         print: "Imprimer / PDF",
         copy_link: "Copier le lien",
@@ -1330,7 +1351,6 @@
         status: "🟢 End-of-Studies Internship (3 to 6 months from Jan 2027) | Geographical Mobility",
         subtitle: "Master's Student in Actuarial Science & Data Science",
         bio: "People often describe me as someone who thrives on understanding complex topics in depth, learning continuously, and adapting quickly to new environments. Curious and self-driven, I enjoy both consolidating my core foundation and taking on new quantitative challenges with rigor, accountability, and strong commitment. \n\n For my final-year internship, I am looking to deepen my expertise in actuarial modeling, quantitative risk management, and big data analytics. Long term, my objective is to complete the IFoA (Institute and Faculty of Actuaries) qualifications to practice internationally as a credentialed actuary.\n\n Analytical, adaptable, and a fast learner, I bring a strong dual foundation in actuarial science and data science, advanced proficiency in programming tools, and a high level of dedication to supporting technical actuarial projects.",
-        scroll_hint: "Explore sections below 🠗",
         click_view: "View",
         print: "Print / PDF",
         copy_link: "Copy link",
@@ -1526,6 +1546,23 @@
         history.pushState({ view: viewId }, '', '#' + viewId);
       }
     }
+
+    function scrollToMenu() {
+      const menuGrid = document.getElementById('menuGrid');
+      if (menuGrid) {
+        menuGrid.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    window.addEventListener('scroll', () => {
+      const scrollBtn = document.getElementById('scrollBtn');
+      if (!scrollBtn) return;
+      if (window.scrollY > 150) {
+        scrollBtn.classList.add('hidden');
+      } else {
+        scrollBtn.classList.remove('hidden');
+      }
+    });
 
     window.addEventListener('popstate', (e) => {
       const viewId = e.state && e.state.view ? e.state.view : 'home';
