@@ -1246,7 +1246,7 @@
         contact_education_value: "Master 2 Actuariat & DU Big Data",
         status: "🟢 Stage de fin d'études de 3 à 6 mois dès Janvier 2027 | Mobilité géographique",
         subtitle: "Étudiante en Master Actuariat & Data Science",
-        bio: "On dit de moi que j'aime comprendre les sujets en profondeur, apprendre continuellement et m'adapter rapidement à de nouveaux environnements. Curieuse et autonome, j'apprécie autant consolider mes acquis que me confronter à de nouveaux défis quantitatifs avec rigueur et engagement. \n\n Dans le cadre de mon stage de fin d'études, je souhaite développer mon expertise en modélisation actuarielle, en analyse quantitative des risques et en valorisation de données massives. À long terme, j'ambitionne de passer les examens de l'IFoA pour obtenir la qualification d'actuaire certifiée et évoluer dans un contexte international. \n\n Rigoureuse, réactive et dotée d'une forte capacité d'apprentissage, j'apporte une double compétence solide en actuariat et data science, une maîtrise opérationnelle de la programmation, ainsi qu'une réelle motivation à contribuer activement aux projets technico-actuariels de l'équipe.",
+        bio: "On dit de moi que j'aime comprendre les sujets en profondeur, apprendre continuellement et m'adapter rapidement à de nouveaux environnements. Curieuse et autonome, j'apprécie autant consolider mes acquis que me confronter à de nouveaux défis quantitatifs avec <strong>rigueur et engagement</strong>.<br><br>Dans le cadre de mon stage de fin d'études, je souhaite développer mon expertise en <strong>modélisation actuarielle</strong>, en <strong>analyse quantitative des risques</strong> et en valorisation de données massives. À long terme, j'ambitionne de passer les examens de l'<strong>IFoA</strong> pour obtenir la qualification d'actuaire certifiée et évoluer dans un <strong>contexte international</strong>.<br><br>Rigoureuse, réactive et dotée d'une <strong>forte capacité d'apprentissage</strong>, j'apporte une <strong>double compétence solide en actuariat et data science</strong>, une maîtrise opérationnelle de la programmation, ainsi qu'une réelle motivation à contribuer activement aux projets technico-actuariels de l'équipe.",
         click_view: "Voir",
         print: "Imprimer / PDF",
         copy_link: "Copier le lien",
@@ -1350,7 +1350,7 @@
         contact_education_value: "Master's in Actuarial Science & University Diploma in Big Data",
         status: "🟢 End-of-Studies Internship (3 to 6 months from Jan 2027) | Geographical Mobility",
         subtitle: "Master's Student in Actuarial Science & Data Science",
-        bio: "People often describe me as someone who thrives on understanding complex topics in depth, learning continuously, and adapting quickly to new environments. Curious and self-driven, I enjoy both consolidating my core foundation and taking on new quantitative challenges with rigor, accountability, and strong commitment. \n\n For my final-year internship, I am looking to deepen my expertise in actuarial modeling, quantitative risk management, and big data analytics. Long term, my objective is to complete the IFoA (Institute and Faculty of Actuaries) qualifications to practice internationally as a credentialed actuary.\n\n Analytical, adaptable, and a fast learner, I bring a strong dual foundation in actuarial science and data science, advanced proficiency in programming tools, and a high level of dedication to supporting technical actuarial projects.",
+        bio: "People often describe me as someone who thrives on understanding complex topics in depth, learning continuously, and adapting quickly to new environments. Curious and self-driven, I enjoy both consolidating my core foundation and taking on new quantitative challenges with <strong>rigor, accountability, and strong commitment</strong>.<br><br>For my final-year internship, I am looking to deepen my expertise in <strong>actuarial modeling</strong>, <strong>quantitative risk management</strong>, and big data analytics. Long term, my objective is to complete the <strong>IFoA</strong> (Institute and Faculty of Actuaries) qualifications to practice internationally as a credentialed actuary in an <strong>international environment</strong>.<br><br>Analytical, adaptable, and a <strong>fast learner</strong>, I bring a <strong>strong dual foundation in actuarial science and data science</strong>, advanced proficiency in programming tools, and a high level of dedication to supporting technical actuarial projects.",
         click_view: "View",
         print: "Print / PDF",
         copy_link: "Copy link",
@@ -1604,15 +1604,14 @@
       }
     });
 
-    function updateTranslations() {
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (translations[currentLang][key]) {
-          el.innerText = translations[currentLang][key];
-        }
-      });
+       function updateTranslations() {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (translations[currentLang][key]) {
+      el.innerHTML = translations[currentLang][key];
     }
-
+  });
+         
     const filterBtns = document.querySelectorAll('.filter-btn');
     const cards = document.querySelectorAll('#projectsGrid .project-card');
 
