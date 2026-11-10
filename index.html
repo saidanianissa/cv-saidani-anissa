@@ -194,6 +194,28 @@
       text-decoration: underline;
     }
 
+    /* Animation Scroll Hint Mobile */
+    .scroll-hint {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+      padding: 10px 0 0 0;
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 600;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-8px); }
+      60% { transform: translateY(-4px); }
+    }
+
+    @media (max-width: 768px) {
+      .scroll-hint { display: block; }
+    }
+
     /* Grille de navigation sur l'accueil */
     .menu-grid {
       display: grid;
@@ -213,6 +235,7 @@
       flex-direction: column;
       align-items: center;
       gap: 10px;
+      position: relative;
     }
 
     .menu-card:hover {
@@ -234,6 +257,20 @@
     .menu-card-desc {
       font-size: 0.85rem;
       color: var(--text-muted);
+    }
+
+    /* Badge Cliquable "Voir →" */
+    .card-action-badge {
+      margin-top: 5px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #ffffff;
+      background-color: var(--accent);
+      padding: 4px 12px;
+      border-radius: 15px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
 
     .view-section {
@@ -494,7 +531,6 @@
       margin-top: 12px;
     }
 
-    /* Style des maquettes de formation */
     .maquette-toggle-btn {
       background: rgba(56, 189, 248, 0.1);
       color: var(--accent);
@@ -565,7 +601,6 @@
       color: var(--accent);
     }
 
-    /* Modal avec Visionneuse PDF Iframe */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -620,7 +655,6 @@
       border: none;
     }
 
-    /* Adaptation mobile / responsive */
     @media (max-width: 640px) {
       .maquette-grid {
         grid-template-columns: 1fr;
@@ -648,15 +682,12 @@
     }
 
     @media print {
-      header, .filter-bar, .controls, .btn, .menu-grid, .btn-back, .maquette-toggle-btn, .action-btn-group { display: none !important; }
+      header, .filter-bar, .controls, .btn, .menu-grid, .btn-back, .maquette-toggle-btn, .action-btn-group, .scroll-hint { display: none !important; }
       .view-section, .maquette-content { display: block !important; }
       body { background: #fff; color: #000; }
       .project-card, .timeline-item, .skill-box, .lang-card { border: 1px solid #ccc; break-inside: avoid; }
       .section-title::after { background: #000; }
     }
-
- 
-
   </style>
 </head>
 <body>
@@ -691,12 +722,12 @@
           <div class="hero-text">
             <div class="status-badge" data-i18n="status">🟢 Stage de fin d'études de 3 à 6 mois dès Janvier 2027 | Mobilité géographique</div>
             <h1>Anissa SAIDANI</h1>
-            <h2 data-i18n="subtitle">Étudiante en Master Actuariat & Data Science </h2>
-                <p data-i18n="bio">
-                    J'aime comprendre les sujets en profondeur, apprendre et m'adapter à de nouveaux environnements. Curieuse et autonome, j'apprécie autant approfondir mes acquis que me confronter à de nouveaux défis. J'accorde une importance particulière à la qualité du travail, au sens des responsabilités et à l'engagement que l'on met dans chaque mission.<br><br>
-                    Dans le cadre de mon stage de fin d'études, je souhaite développer mon expertise en modélisation actuarielle, en analyse quantitative des risques et en valorisation de données massives. À long terme, j'ambitionne de passer les examens de l'IFoA pour obtenir la qualification d'actuaire certifiée et évoluer dans un contexte international. <br><br>
-                    Rigoureuse, réactive et dotée d'une forte capacité d'apprentissage, j'apporte une double compétence solide en actuariat et data science, une maîtrise opérationnelle de la programmation, ainsi qu'une réelle motivation à contribuer activement aux projets technico-actuariels de l'équipe.
-                </p>
+            <h2 data-i18n="subtitle">Étudiante en Master Actuariat & Data Science</h2>
+            <p data-i18n="bio">
+                On dit de moi que j'aime comprendre les sujets en profondeur, apprendre continuellement et m'adapter rapidement à de nouveaux environnements. Curieuse et autonome, j'apprécie autant consolider mes acquis que me confronter à de nouveaux défis quantitatifs avec rigueur et engagement.<br><br>
+                Dans le cadre de mon stage de fin d'études, je souhaite développer mon expertise en modélisation actuarielle, en analyse quantitative des risques et en valorisation de données massives. À long terme, j'ambitionne de passer les examens de l'IFoA pour obtenir la qualification d'actuaire certifiée et évoluer dans un contexte international.<br><br>
+                Rigoureuse, réactive et dotée d'une forte capacité d'apprentissage, j'apporte une double compétence solide en actuariat et data science, une maîtrise opérationnelle de la programmation, ainsi qu'une réelle motivation à contribuer activement aux projets technico-actuariels de l'équipe.
+            </p>
           </div>
           <div>
             <ul class="contact-list">
@@ -708,32 +739,41 @@
             </ul>
           </div>
         </div>
+
+        <!-- INDICATEUR VISUEL POUR MOBILE -->
+        <div class="scroll-hint" data-i18n="scroll_hint">
+          Découvrir les rubriques ci-dessous 🠗
+        </div>
       </section>
 
-      <!-- 4 Grands Boutons sur l'accueil -->
+      <!-- 4 Grands Boutons sur l'accueil avec Affordance Cliquable -->
       <div class="menu-grid">
         <div class="menu-card" onclick="showView('projects')">
           <div class="menu-card-icon">💻</div>
           <div class="menu-card-title" data-i18n="projects_title">Projets Académiques</div>
           <div class="menu-card-desc" data-i18n="menu_projects_desc">GLM/GAM, SAS, Python, F1 & Actuariat Vie</div>
+          <div class="card-action-badge"><span data-i18n="click_view">Voir</span> →</div>
         </div>
 
         <div class="menu-card" onclick="showView('education')">
           <div class="menu-card-icon">🎓</div>
           <div class="menu-card-title" data-i18n="edu_title">Formation</div>
           <div class="menu-card-desc" data-i18n="menu_edu_desc">Master Actuariat, D.U. Big Data & Licence</div>
+          <div class="card-action-badge"><span data-i18n="click_view">Voir</span> →</div>
         </div>
 
         <div class="menu-card" onclick="showView('experience')">
           <div class="menu-card-icon">💼</div>
           <div class="menu-card-title" data-i18n="exp_title">Expérience Professionnelle</div>
           <div class="menu-card-desc" data-i18n="menu_exp_desc">Momji & Boncolac</div>
+          <div class="card-action-badge"><span data-i18n="click_view">Voir</span> →</div>
         </div>
 
         <div class="menu-card" onclick="showView('skills')">
           <div class="menu-card-icon">📊</div>
           <div class="menu-card-title" data-i18n="skills_title">Compétences & Outils</div>
           <div class="menu-card-desc" data-i18n="menu_skills_desc">Actuariat, SAS, R, Python, SQL & Langues</div>
+          <div class="card-action-badge"><span data-i18n="click_view">Voir</span> →</div>
         </div>
       </div>
     </div>
@@ -818,7 +858,7 @@
       </div>
     </div>
 
-    <!-- FORMATION AVEC LES PDF MODALE ET MAQUETTES OFFICIELLES -->
+    <!-- FORMATION -->
     <div id="view-education" class="view-section">
       <button class="btn btn-back" onclick="showView('home')">⬅ <span data-i18n="back_home">Retour au profil</span></button>
       <h3 class="section-title" data-i18n="edu_title">Formation</h3>
@@ -1083,33 +1123,33 @@
       <h3 class="section-title" data-i18n="skills_title">Compétences & Outils</h3>
       <div class="skills-grid">
         <div class="skill-box">
-          <h4 data-i18n="sk_act">Quantitatif & Actuariat</h4>
+          <h4 data-i18n="sk_prog">Programmation & Outils Analytiques</h4>
+          <ul>
+            <li data-i18n="sk_prog_1">Python, R, SAS, SQL, VBA, Stata</li>
+            <li data-i18n="sk_prog_2">Machine Learning & Réseaux de neurones</li>
+            <li data-i18n="sk_prog_3">Nettoyage, Imputation & Extraction de données</li>
+            <li data-i18n="sk_prog_4">Environnements : VS Code, LaTeX, Excel Avancé</li>
+          </ul>
+        </div>
+
+        <div class="skill-box">
+          <h4 data-i18n="sk_act">Quantitatif & Modélisation Actuarielle</h4>
           <ul>
             <li data-i18n="sk_act_1">Modélisation du risque (Vie / Non-Vie)</li>
             <li data-i18n="sk_act_2">Théorie du risque & Tarification</li>
             <li data-i18n="sk_act_3">Provisionnement actuariel</li>
-            <li data-i18n="sk_act_4">Économétrie des séries temporelles (ARIMA, GARCH)</li>
-            <li data-i18n="sk_act_5">Calcul stochastique & Analyse financière</li>
+            <li data-i18n="sk_act_4">Économétrie des séries temporelles (ARIMA, GARCH) & GLM/GAM</li>
+            <li data-i18n="sk_act_5">Calcul stochastique & Finance quantitative</li>
           </ul>
         </div>
 
         <div class="skill-box">
-          <h4 data-i18n="sk_prog">Programmation & Outils</h4>
+          <h4 data-i18n="sk_soft">Soft Skills & Organisation</h4>
           <ul>
-            <li>Python, R, SAS, SQL, VBA, Stata</li>
-            <li data-i18n="sk_prog_2">Machine Learning & Réseaux de neurones</li>
-            <li>VS Code, LaTeX</li>
-            <li>Microsoft Office (Excel, PowerPoint, Word)</li>
-          </ul>
-        </div>
-
-        <div class="skill-box">
-          <h4 data-i18n="sk_soft">Soft Skills</h4>
-          <ul>
-            <li data-i18n="sk_soft_1">Rigueur analytique & Autonomie</li>
-            <li data-i18n="sk_soft_2">Aisance relationnelle</li>
-            <li data-i18n="sk_soft_3">Adaptabilité & Curiosité</li>
-            <li data-i18n="sk_soft_4">Travail en équipe</li>
+            <li data-i18n="sk_soft_1">Adaptabilité & Apprentissage rapide (Nouvelles technos)</li>
+            <li data-i18n="sk_soft_2">Rigueur analytique, Précision & Autonomie</li>
+            <li data-i18n="sk_soft_3">Aisance relationnelle & Sens du collectif</li>
+            <li data-i18n="sk_soft_4">Pédagogie & Travail en équipe</li>
           </ul>
         </div>
       </div>
@@ -1185,6 +1225,8 @@
         status: "🟢 Stage de fin d'études de 3 à 6 mois dès Janvier 2027 | Mobilité géographique",
         subtitle: "Étudiante en Master Actuariat & Data Science",
         bio: "On dit de moi que j'aime comprendre les sujets en profondeur, apprendre continuellement et m'adapter rapidement à de nouveaux environnements. Curieuse et autonome, j'apprécie autant consolider mes acquis que me confronter à de nouveaux défis quantitatifs avec rigueur et engagement. \n\n Dans le cadre de mon stage de fin d'études, je souhaite développer mon expertise en modélisation actuarielle, en analyse quantitative des risques et en valorisation de données massives. À long terme, j'ambitionne de passer les examens de l'IFoA pour obtenir la qualification d'actuaire certifiée et évoluer dans un contexte international. \n\n Rigoureuse, réactive et dotée d'une forte capacité d'apprentissage, j'apporte une double compétence solide en actuariat et data science, une maîtrise opérationnelle de la programmation, ainsi qu'une réelle motivation à contribuer activement aux projets technico-actuariels de l'équipe.",
+        scroll_hint: "Découvrir les rubriques ci-dessous 🠗",
+        click_view: "Voir",
         print: "Imprimer / PDF",
         copy_link: "Copier le lien",
         link_copied: "✓ Lien copié !",
@@ -1243,19 +1285,22 @@
         exp2_role: "Agent de production - Boncolac",
         exp2_desc: "• Polyvalence sur plusieurs postes de la ligne de production lors de la saison estivale.\n• Adaptation rapide aux consignes, aux tâches et aux méthodes de travail changeantes au quotidien.",
         skills_title: "Compétences & Outils",
-        sk_act: "Quantitatif & Actuariat",
+        sk_prog: "Programmation & Outils Analytiques",
+        sk_prog_1: "Python, R, SAS, SQL, VBA, Stata",
+        sk_prog_2: "Machine Learning & Réseaux de neurones",
+        sk_prog_3: "Nettoyage, Imputation & Extraction de données",
+        sk_prog_4: "Environnements : VS Code, LaTeX, Excel Avancé",
+        sk_act: "Quantitatif & Modélisation Actuarielle",
         sk_act_1: "Modélisation du risque (Vie / Non-Vie)",
         sk_act_2: "Théorie du risque & Tarification",
         sk_act_3: "Provisionnement actuariel",
-        sk_act_4: "Économétrie des séries temporelles (ARIMA, GARCH)",
-        sk_act_5: "Calcul stochastique & Analyse financière",
-        sk_prog: "Programmation & Outils",
-        sk_prog_2: "Machine Learning & Réseaux de neurones",
-        sk_soft: "Soft Skills",
-        sk_soft_1: "Rigueur analytique & Autonomie",
-        sk_soft_2: "Aisance relationnelle",
-        sk_soft_3: "Adaptabilité & Curiosité",
-        sk_soft_4: "Travail en équipe",
+        sk_act_4: "Économétrie des séries temporelles (ARIMA, GARCH) & GLM/GAM",
+        sk_act_5: "Calcul stochastique & Finance quantitative",
+        sk_soft: "Soft Skills & Organisation",
+        sk_soft_1: "Adaptabilité & Apprentissage rapide (Nouvelles technos)",
+        sk_soft_2: "Rigueur analytique, Précision & Autonomie",
+        sk_soft_3: "Aisance relationnelle & Sens du collectif",
+        sk_soft_4: "Pédagogie & Travail en équipe",
         lang_section_title: "Compétences Linguistiques",
         lang_fr: "Français",
         lang_fr_lvl: "Langue Maternelle",
@@ -1285,6 +1330,8 @@
         status: "🟢 End-of-Studies Internship (3 to 6 months from Jan 2027) | Geographical Mobility",
         subtitle: "Master's Student in Actuarial Science & Data Science",
         bio: "People often describe me as someone who thrives on understanding complex topics in depth, learning continuously, and adapting quickly to new environments. Curious and self-driven, I enjoy both consolidating my core foundation and taking on new quantitative challenges with rigor, accountability, and strong commitment. \n\n For my final-year internship, I am looking to deepen my expertise in actuarial modeling, quantitative risk management, and big data analytics. Long term, my objective is to complete the IFoA (Institute and Faculty of Actuaries) qualifications to practice internationally as a credentialed actuary.\n\n Analytical, adaptable, and a fast learner, I bring a strong dual foundation in actuarial science and data science, advanced proficiency in programming tools, and a high level of dedication to supporting technical actuarial projects.",
+        scroll_hint: "Explore sections below 🠗",
+        click_view: "View",
         print: "Print / PDF",
         copy_link: "Copy link",
         link_copied: "✓ Link copied!",
@@ -1343,19 +1390,22 @@
         exp2_role: "Production Associate - Boncolac",
         exp2_desc: "• Versatility across multiple production line posts during the summer season.\n• Rapid adaptation to daily changing instructions, tasks, and procedures.",
         skills_title: "Skills & Tools",
-        sk_act: "Quantitative & Actuarial",
+        sk_prog: "Programming & Analytical Tools",
+        sk_prog_1: "Python, R, SAS, SQL, VBA, Stata",
+        sk_prog_2: "Machine Learning & Neural Networks",
+        sk_prog_3: "Data Cleaning, Imputation & Extraction",
+        sk_prog_4: "Tech Environments: VS Code, LaTeX, Advanced Excel",
+        sk_act: "Quantitative & Actuarial Modeling",
         sk_act_1: "Risk Modeling (Life / Non-Life)",
         sk_act_2: "Risk Theory & Pricing",
         sk_act_3: "Actuarial Reserving",
-        sk_act_4: "Time Series Econometrics (ARIMA, GARCH)",
+        sk_act_4: "Time Series Econometrics (ARIMA, GARCH) & GLM/GAM",
         sk_act_5: "Stochastic Calculus & Financial Analysis",
-        sk_prog: "Programming & Tools",
-        sk_prog_2: "Machine Learning & Neural Networks",
-        sk_soft: "Soft Skills",
-        sk_soft_1: "Analytical Rigor & Autonomy",
-        sk_soft_2: "Interpersonal & Communication Skills",
-        sk_soft_3: "Adaptability & Curiosity",
-        sk_soft_4: "Teamwork",
+        sk_soft: "Soft Skills & Organization",
+        sk_soft_1: "Adaptability & Fast Learning (New Technologies)",
+        sk_soft_2: "Analytical Rigor, Precision & Autonomy",
+        sk_soft_3: "Interpersonal Skills & Team Spirit",
+        sk_soft_4: "Peer Support & Educational Tutoring",
         lang_section_title: "Language Skills",
         lang_fr: "French",
         lang_fr_lvl: "Native",
@@ -1593,7 +1643,6 @@
       document.getElementById('pdfFrame').src = "";
       document.getElementById('modalOverlay').style.display = 'none';
     }
-
   </script>
 </body>
 </html>
